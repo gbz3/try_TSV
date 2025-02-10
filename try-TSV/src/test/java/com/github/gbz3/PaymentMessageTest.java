@@ -4,10 +4,11 @@ import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
 import org.assertj.core.api.Assertions;
 
-public class PaymentMessageTest {
+public class PaymentMessageTest implements AutoCloseable {
 
     @Example
     void 例外がスローされることを確認する() {
+        System.out.println("Test throw Exception");
         Assertions.assertThatThrownBy(() -> PaymentMessage.of(-1, 999))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("Invalid mti");
@@ -30,6 +31,7 @@ public class PaymentMessageTest {
             @ForAll @IntRange(max = 9999) int mti,
             @ForAll @IntRange(max = 999) int transactionCode
     ) {
+        System.out.println("Test parameters");
         var message = PaymentMessage.of(mti, transactionCode);
         Assertions.assertThat(message.getMTI()).containsOnlyDigits();
         Assertions.assertThat(message.getMTI().length()).isEqualTo(4);
@@ -37,4 +39,12 @@ public class PaymentMessageTest {
         Assertions.assertThat(message.getTransactionCode().length()).isEqualTo(3);
     }
 
+    PaymentMessageTest() {
+        System.out.print("Before each\n");
+    }
+
+    @Override
+    public void close() {
+        System.out.print("After each\n");
+    }
 }
