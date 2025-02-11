@@ -23,8 +23,8 @@ public enum DataElementNumber {
         _name = name;
     }
 
-    public int getNumber() {
-        return _number;
+    public String getNumber() {
+        return String.format("%04d", _number);
     }
 
     public int getNumOfDigits() {

@@ -21,12 +21,16 @@ public class DataElement {
         return new DataElement(de, data);
     }
 
+    public @NotNull DataElementNumber getNumber() {
+        return _number;
+    }
+
     /**
      * DE項目の番号が同じなら同一と判定する
      */
     @Override
     public int hashCode() {
-        return _number.getNumber();
+        return _number.hashCode();
     }
 
     /**
@@ -35,7 +39,7 @@ public class DataElement {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof DataElement
-                && _number.getNumber() == ((DataElement) obj)._number.getNumber();
+                && _number.hashCode() == ((DataElement) obj)._number.hashCode();
     }
 
 }
