@@ -25,6 +25,10 @@ public class DataElement {
         return _number;
     }
 
+    public @NotNull String getData() {
+        return _data;
+    }
+
     /**
      * DE項目の番号が同じなら同一と判定する
      */

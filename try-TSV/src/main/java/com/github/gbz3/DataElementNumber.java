@@ -24,7 +24,7 @@ public enum DataElementNumber {
     }
 
     public String getNumber() {
-        return String.format("%04d", _number);
+        return String.format("%03d", _number);
     }
 
     public int getNumOfDigits() {
