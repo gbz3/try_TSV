@@ -31,7 +31,6 @@ public class PaymentMessageTest implements AutoCloseable {
             @ForAll @IntRange(max = 9999) int mti,
             @ForAll @IntRange(max = 999) int transactionCode
     ) {
-        System.out.println("Test parameters");
         var message = PaymentMessage.of(mti, transactionCode);
         Assertions.assertThat(message.getMTI()).containsOnlyDigits();
         Assertions.assertThat(message.getMTI().length()).isEqualTo(4);
